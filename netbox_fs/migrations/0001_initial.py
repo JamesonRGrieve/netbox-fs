@@ -18,8 +18,9 @@ class Migration(migrations.Migration):
     dependencies = [
         ("dcim", "0001_initial"),
         ("extras", "0001_initial"),
-        # Asset is netbox-inventory's core model, created in its initial migration.
-        ("netbox_inventory", "0001_initial"),
+        # Asset is created in netbox-inventory's FIRST migration; __first__ is name-agnostic
+        # (this lab's is 0001_initial_prod; upstream is 0001_initial — a hard pin breaks one or the other).
+        ("netbox_inventory", "__first__"),
     ]
     operations = [
         migrations.CreateModel(
