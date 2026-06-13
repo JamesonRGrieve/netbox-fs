@@ -1,0 +1,38 @@
+{% extends 'generic/object.html' %}
+{% load helpers %}
+{% block content %}
+<div class="row">
+  <div class="col col-md-6">
+    <div class="card">
+      <h2 class="card-header">Partition</h2>
+      <table class="table table-hover attr-table">
+        <tr><th scope="row">Disk</th><td>{{ object.disk|linkify }}</td></tr>
+        <tr><th scope="row">Number</th><td>{{ object.number }}</td></tr>
+        <tr><th scope="row">Name</th><td>{{ object.name|placeholder }}</td></tr>
+        <tr><th scope="row">Usage</th><td>{% badge object.get_usage_display bg_color=object.get_usage_color %}</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2 class="card-header">Geometry (inclusive LBA)</h2>
+      <table class="table table-hover attr-table">
+        <tr><th scope="row">Start sector</th><td>{{ object.start_sector }}</td></tr>
+        <tr><th scope="row">End sector</th><td>{{ object.end_sector }}</td></tr>
+        <tr><th scope="row">Size (sectors)</th><td>{{ object.size_sectors }}</td></tr>
+        <tr><th scope="row">Size (bytes)</th><td>{{ object.size_bytes }}</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="col col-md-6">
+    <div class="card">
+      <h2 class="card-header">GPT</h2>
+      <table class="table table-hover attr-table">
+        <tr><th scope="row">Type</th><td>{{ object.partition_type|placeholder }}</td></tr>
+        <tr><th scope="row">Partition GUID</th><td>{{ object.partition_guid|placeholder }}</td></tr>
+        <tr><th scope="row">Attributes</th><td>{% if object.attributes %}<pre class="mb-0">{{ object.attributes|pprint }}</pre>{% else %}{{ ''|placeholder }}{% endif %}</td></tr>
+      </table>
+    </div>
+    {% include 'inc/panels/tags.html' %}
+    {% include 'inc/panels/custom_fields.html' %}
+  </div>
+</div>
+{% endblock %}

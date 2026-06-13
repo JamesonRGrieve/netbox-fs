@@ -1,0 +1,29 @@
+{% extends 'generic/object.html' %}
+{% load helpers %}
+{% block content %}
+<div class="row">
+  <div class="col col-md-6">
+    <div class="card">
+      <h2 class="card-header">Filesystem</h2>
+      <table class="table table-hover attr-table">
+        <tr><th scope="row">Partition</th><td>{{ object.partition|linkify }}</td></tr>
+        <tr><th scope="row">Type</th><td>{{ object.get_fs_type_display }}</td></tr>
+        <tr><th scope="row">Label</th><td>{{ object.label|placeholder }}</td></tr>
+        <tr><th scope="row">UUID</th><td>{{ object.uuid|placeholder }}</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2 class="card-header">Mount</h2>
+      <table class="table table-hover attr-table">
+        <tr><th scope="row">Mountpoint</th><td>{{ object.mountpoint|placeholder }}</td></tr>
+        <tr><th scope="row">Mount options</th><td>{{ object.mount_options|placeholder }}</td></tr>
+        <tr><th scope="row">Advanced</th><td>{% if object.advanced %}<pre class="mb-0">{{ object.advanced|pprint }}</pre>{% else %}{{ ''|placeholder }}{% endif %}</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="col col-md-6">
+    {% include 'inc/panels/tags.html' %}
+    {% include 'inc/panels/custom_fields.html' %}
+  </div>
+</div>
+{% endblock %}

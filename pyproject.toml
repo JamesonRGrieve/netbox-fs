@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "netbox-fs"
+version = "0.0.1"
+description = "Native NetBox source of truth for physical disk geometry, partitions, and filesystems"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "AGPL-3.0-or-later"
+authors = [{ name = "Jameson" }]
+keywords = ["netbox", "netbox-plugin", "storage", "disk", "partition", "filesystem", "gpt"]
+# PEP 639: the SPDX `license` expression above is authoritative; a `License ::`
+# classifier alongside it is rejected by setuptools>=77, so it is intentionally omitted.
+classifiers = [
+    "Framework :: Django",
+    "Programming Language :: Python :: 3",
+]
+dependencies = ["netbox-inventory"]
+
+[project.urls]
+Repository = "https://github.com/JamesonRGrieve/netbox-fs"
+
+[tool.setuptools.packages.find]
+include = ["netbox_fs*"]
+
+[tool.black]
+line-length = 100
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "netbox.settings"
+python_files = ["test_*.py"]
+addopts = "-v"
